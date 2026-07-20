@@ -1,0 +1,4 @@
+order_id,order_date,customer_id,product_id,quantity,unit_price,status,region
+ORD-038,2026-06-10,C036,P005,1,129.99,complete,Yorkshire
+ORD-039,2026-06-10,C037,P007,2,14.99,complete,London
+ORD-040,2026-06-11,C038,P001,1,89.99,complete,Wales, near Cardiff
