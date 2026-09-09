@@ -1,0 +1,6 @@
+order_id,order_date,customer_id,product_id,quantity,unit_price,status,region
+ORD-029,2026-05-30,C028,P006,1,149.99,complete,Scotland
+ORD-030,30/05/2026,C029,P009,2,49.99,Complete,Midlands
+ORD-031,2026-06-01,C013,P002,1,£59.99,complete,South East
+ORD-032,2026-06-02,C030,P004,three,18.99,complete,Wales
+ORD-033,2026-06-02,C031,P008,2,19.99,pending,London

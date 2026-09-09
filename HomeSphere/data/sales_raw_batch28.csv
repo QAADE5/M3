@@ -1,5 +1,4 @@
-order_id,order_date,customer_id,product_id,quantity,price,status,region
-ORD-034,2026-06-05,C032,P001,1,89.99,complete,Scotland
-ORD-035,2026-06-05,C033,P006,2,149.99,complete,Wales
-ORD-036,2026-06-06,C034,P003,1,24.99,complete,London
-ORD-037,2026-06-06,C035,P009,3,49.99,complete,Midlands
+order_id,order_date,customer_id,product_id,quantity,unit_price,status,region
+ORD-038,2026-06-10,C036,P005,1,129.99,complete,Yorkshire
+ORD-039,2026-06-10,C037,P007,2,14.99,complete,London
+ORD-040,2026-06-11,C038,P001,1,89.99,complete,Wales, near Cardiff
