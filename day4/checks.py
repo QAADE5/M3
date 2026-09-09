@@ -1,12 +1,10 @@
 """
 checks.py -- add your validation checks here.
 
-Use the try/except pattern in either function:
+Use the if pattern in either function:
 
-    try:
-        assert <condition>, "<message if it fails>"
-    except Exception as e:
-        errors.append(str(e))
+    if <condition that means failure>:
+        errors.append("<message>")
 
 get_failures()  -- pipeline stops if any of these fail
 get_warnings()  -- pipeline continues but prints a warning
@@ -20,20 +18,14 @@ import pandas as pd
 def get_failures(df):
     errors = []
 
-    #try:
-    #    assert df['product_id'].isnull().sum() == 0, "product_id has null values"
-    #except Exception as e:
-    #    errors.append(str(e))
+    #if df['product_id'].isnull().sum() > 0:
+    #    errors.append("product_id has null values")
 
-    #try:
-    #    assert pd.api.types.is_float_dtype(df['unit_price']), "unit_price should be float"
-    #except Exception as e:
-    #    errors.append(str(e))
+    #if not pd.api.types.is_float_dtype(df['unit_price']):
+    #    errors.append("unit_price should be float")
 
-    #try:
-    #    assert (df['quantity'] > 0).all(), "quantity should be positive"
-    #except Exception as e:
-    #    errors.append(str(e))
+    #if not (pd.to_numeric(df['quantity'], errors='coerce') > 0).all():
+    #    errors.append("quantity should be positive")
 
     return errors
 
@@ -41,10 +33,7 @@ def get_failures(df):
 def get_warnings(df):
     errors = []
 
-    try:
-        assert df['status'].str.lower().isin(['complete', 'refunded', 'pending']).all(), \
-            "status has unrecognised values"
-    except Exception as e:
-        errors.append(str(e))
+    if not df['status'].str.lower().isin(['complete', 'refunded', 'pending']).all():
+        errors.append("status has unrecognised values")
 
     return errors

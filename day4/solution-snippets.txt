@@ -1,0 +1,25 @@
+Day 4 - Run the Pipeline Locally - stretch hints
+
+Some snippets for the stretch tasks. These are starting points, not
+drop-in code -- you'll still need to work out where each piece goes and
+fix at least one thing yourself.
+
+--- Write failing rows to rejected.csv ---
+
+The check pattern used elsewhere only tells you a check failed, not
+which rows caused it. You need to filter the dataframe separately:
+
+    bad_rows = df[df['quantity'] <= 0]
+    if not bad_rows.empty:
+        bad_rows.to_csv(os.path.join(DIR, "rejected.csv"), index=False)
+        errors.append(f"{len(bad_rows)} row(s) with quantity <= 0")
+
+Note: `DIR` is only defined in pipeline.py, not checks.py. You'll need to
+either define it in checks.py yourself or pass the path in as an
+argument.
+
+--- Add a timestamp to the warning message ---
+
+    from datetime import datetime
+    ...
+    errors.append(f"[{datetime.now().isoformat()}] status has unrecognised values")
