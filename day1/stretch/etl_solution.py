@@ -16,7 +16,7 @@ import pandas as pd
 import json
 
 
-def clean_sales(path="../data/sales_raw.csv"):
+def clean_sales(path="HomeSphere/data/sales_raw.csv"):
     df = pd.read_csv(path)
     print(f"Loaded sales: {df.shape[0]} rows, {df.shape[1]} columns")
 
@@ -46,7 +46,7 @@ def clean_sales(path="../data/sales_raw.csv"):
     return df
 
 
-def flatten_products(path="../data/products_raw.json"):
+def flatten_products(path="HomeSphere/data/products_raw.json"):
     with open(path) as f:
         data = json.load(f)
 
@@ -85,13 +85,13 @@ def main():
     print("=== HomeSphere ETL ===\n")
 
     sales = clean_sales()
-    sales.to_csv("cleaned_sales.csv", index=False)
+    sales.to_csv("HomeSphere/solution/cleaned_sales.csv", index=False)
     print("  Saved: cleaned_sales.csv\n")
 
     products = flatten_products()
 
     joined, revenue = join_and_aggregate(sales, products)
-    joined.to_csv("sales_joined.csv", index=False)
+    joined.to_csv("HomeSphere/solution/sales_joined.csv", index=False)
     print("  Saved: sales_joined.csv\n")
 
     total = joined["line_value"].sum()
