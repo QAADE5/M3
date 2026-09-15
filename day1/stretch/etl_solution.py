@@ -8,8 +8,8 @@ Runs the full pipeline in a single script:
   4. Print a revenue-by-category summary
   5. Save cleaned_sales.csv and sales_joined.csv
 
-Run from the folder that contains the data files:
-  python etl_solution.py
+Run from the M3 directory:
+  python day1/stretch/etl_solution.py
 """
 
 import pandas as pd
