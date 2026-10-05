@@ -9,14 +9,10 @@ fix at least one thing yourself.
 The check pattern used elsewhere only tells you a check failed, not
 which rows caused it. You need to filter the dataframe separately:
 
-    bad_rows = df[df['quantity'] <= 0]
-    if not bad_rows.empty:
-        bad_rows.to_csv(os.path.join(DIR, "rejected.csv"), index=False)
-        errors.append(f"{len(bad_rows)} row(s) with quantity <= 0")
+    bad_rows = df[pd.to_numeric(df['quantity'], errors='coerce') <= 0]
 
-Note: `DIR` is only defined in pipeline.py, not checks.py. You'll need to
-either define it in checks.py yourself or pass the path in as an
-argument.
+From there it's just pandas -- write bad_rows out to rejected.csv
+however you like.
 
 --- Add a timestamp to the warning message ---
 
