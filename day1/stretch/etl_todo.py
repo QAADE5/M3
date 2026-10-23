@@ -10,8 +10,8 @@ The script should:
   4. Print a revenue-by-category summary
   5. Save cleaned_sales.csv and sales_joined.csv
 
-Run it from this folder:
-  python etl_todo.py
+Run it from the M3 folder:
+  python day1\stretch\etl_todo.py
 """
 
 import json
