@@ -205,3 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Day 1 stretch task output (written by etl_todo.py / etl_solution.py)
+day1/stretch/*.csv

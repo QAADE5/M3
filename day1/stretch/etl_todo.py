@@ -1,5 +1,5 @@
 """
-HomeSphere ETL — stretch task (Day 1)
+HomeSphere ETL - stretch task (Day 1)
 
 Your job: turn the notebook steps into a working Python script.
 
@@ -10,21 +10,27 @@ The script should:
   4. Print a revenue-by-category summary
   5. Save cleaned_sales.csv and sales_joined.csv
 
-Run from the M3 directory:
-  python day1/stretch/etl_todo.py
+Run it from this folder:
+  python etl_todo.py
 """
 
-import pandas as pd
 import json
+from pathlib import Path
+
+import pandas as pd
+
+# Paths are worked out from where this file lives, so the script runs from any folder
+HERE = Path(__file__).resolve().parent
+DATA = HERE.parents[1] / "HomeSphere" / "data"
 
 
-def clean_sales(path="HomeSphere/data/sales_raw.csv"):
+def clean_sales(path=DATA / "sales_raw.csv"):
     df = pd.read_csv(path)
     print(f"Loaded sales: {df.shape[0]} rows, {df.shape[1]} columns")
 
     # TODO: strip the £ sign from unit_price and convert to float
 
-    # TODO: parse order_date — use format='mixed', dayfirst=True, errors='coerce'
+    # TODO: parse order_date - use format='mixed', dayfirst=True, errors='coerce'
 
     # TODO: convert quantity to numeric (coerce errors), drop rows where it is NaN,
     #       then cast to int
@@ -43,7 +49,7 @@ def clean_sales(path="HomeSphere/data/sales_raw.csv"):
     return df
 
 
-def flatten_products(path="HomeSphere/data/products_raw.json"):
+def flatten_products(path=DATA / "products_raw.json"):
     with open(path) as f:
         data = json.load(f)
 
@@ -76,13 +82,13 @@ def main():
     print("=== HomeSphere ETL ===\n")
 
     sales = clean_sales()
-    sales.to_csv("HomeSphere/solution/cleaned_sales.csv", index=False)
+    sales.to_csv(HERE / "cleaned_sales.csv", index=False)
     print("  Saved: cleaned_sales.csv\n")
 
     products = flatten_products()
 
     joined, revenue = join_and_aggregate(sales, products)
-    joined.to_csv("HomeSphere/solution/sales_joined.csv", index=False)
+    joined.to_csv(HERE / "sales_joined.csv", index=False)
     print("  Saved: sales_joined.csv\n")
 
     total = joined["line_value"].sum()
