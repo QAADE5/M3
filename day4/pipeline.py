@@ -27,7 +27,8 @@ def main():
     print()
     print("LOAD")
     df = pd.read_csv(os.path.join(DIR, "sales_raw.csv"))
-    print(f"  {len(df)} rows from sales_raw.csv")
+    raw_rows = len(df)
+    print(f"  {raw_rows} rows from sales_raw.csv")
 
     # --- Validate ---
     print()
@@ -65,7 +66,23 @@ def main():
     df['region'] = df['region'].fillna('Unknown')
     df = df[df['unit_price'] > 0]
     df = df[df['quantity'] > 0]
-    print(f"  {len(df)} rows after cleaning")
+    print(f"  {len(df)} rows after cleaning ({raw_rows - len(df)} dropped)")
+
+    # --- Validate silver ---
+    print()
+    print("VALIDATE SILVER")
+    silver_failures = checks.get_silver_failures(df, raw_rows)
+
+    for e in silver_failures:
+        print(f"  {RED}FAIL{RESET}  {e}")
+
+    if silver_failures:
+        print()
+        print(f"  {len(silver_failures)} failure(s) -- cleaned data not written.")
+        print()
+        sys.exit(1)
+
+    print(f"  {GREEN}PASS{RESET}  all checks passed")
 
     # --- Output ---
     print()
